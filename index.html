@@ -430,11 +430,11 @@
         };
 
         let httpRequest = new XMLHttpRequest();
-        httpRequest.open(
-          "POST",
-          " http://backend_test.sameerkumarsinha.com/chatbot/feedback"
-        );
+	let url = " http://backend_test.sameerkumarsinha.com/chatbot/feedback";
+        let httpRequest = new XMLHttpRequest();
+        httpRequest.open("POST", url);
         httpRequest.setRequestHeader("Content-Type", "application/json");
+        httpRequest.setRequestHeader("Access-Control-Allow-Origin", url);
         httpRequest.send(JSON.stringify(feedback));
         httpRequest.onerror = function (
           XMLHttpRequest,
