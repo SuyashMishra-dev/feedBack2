@@ -441,7 +441,7 @@
           textStatus,
           errorThrown
         ) {
-          cosole.log("On Error Mark_As_Done", JSON.stringify(XMLHttpRequest));
+          console.log("On Error Mark_As_Done", JSON.stringify(XMLHttpRequest));
         };
         httpRequest.onload = function () {
           var response = JSON.parse(httpRequest.response);
