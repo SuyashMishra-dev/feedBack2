@@ -3,21 +3,507 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Open In Same Tab</title>
-    <style></style>
+    <title>Feedback & Suggestion</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+
+      .feedback-container {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      h3 {
+        color: #052761c7;
+      }
+
+      .card-body h3,
+      .card-body p {
+        margin-top: 2rem;
+      }
+
+      .card {
+        width: 35%;
+        padding-bottom: 2rem;
+        margin: 0 auto;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+      }
+
+      .button-container {
+        background-color: #3680aac7;
+        text-align: right;
+      }
+
+      .button-container button {
+        outline: none;
+        border: none;
+        background-color: #3680aac7;
+        color: #fff;
+      }
+
+      .button-container button:hover {
+        box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3),
+          0 15px 12px rgba(0, 0, 0, 0.22);
+      }
+
+      .button-container button:active {
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19),
+          0 6px 6px rgba(0, 0, 0, 0.23);
+      }
+
+      .card-header {
+        background-color: #3680aac7;
+        display: flex;
+        padding: 0 0.5rem 0 0;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .card-header h1 {
+        font-size: 2.5rem;
+        color: #fff;
+        padding: 1.7rem 0;
+      }
+
+      .card-body {
+        padding: 0 0.7rem;
+      }
+
+      /* ----------------Emoji Css------------------ */
+      h1,
+      p {
+        margin: 0;
+        padding: 0;
+        line-height: 1.5;
+      }
+
+      .app {
+        margin: 0 auto;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .item {
+        width: 80px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+      }
+      .radio {
+        display: none;
+      }
+      .radio ~ span {
+        font-size: 2rem;
+        filter: grayscale(100);
+        cursor: pointer;
+        transition: all 0.4s;
+      }
+
+      .item span:hover {
+        filter: grayscale(0);
+        font-size: 2.4rem;
+      }
+
+      .radio:checked ~ span {
+        filter: grayscale(0);
+        font-size: 3rem;
+      }
+
+      /* -------------Style Thums Up/Down-------------- */
+      .thumbs-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .thumbs-item {
+        width: 80px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+      }
+      .thumbs-radio {
+        display: none;
+      }
+      .thumbs-radio ~ span {
+        font-size: 2rem;
+        filter: grayscale(100);
+        cursor: pointer;
+        transition: all 0.4s;
+      }
+
+      .thumbs-item span:hover {
+        filter: grayscale(0);
+        font-size: 2.4rem;
+      }
+
+      .thumbs-radio:checked ~ span {
+        filter: grayscale(0);
+        font-size: 3rem;
+      }
+
+      /* ---------------Style Star Rating Widget------------- */
+
+      .rating {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: center;
+      }
+
+      .rating > input {
+        display: none;
+      }
+
+      .rating > label {
+        /* float: right; */
+        margin: 0 10px;
+        font-size: 20px;
+      }
+
+      /* Highlight Stars on Hover */
+
+      .rating > input ~ label {
+        filter: grayscale(100);
+        transition: all 0.4s;
+      }
+
+      .rating:not(:checked) > label:hover,
+      .rating:not(:checked) > label:hover ~ label {
+        filter: grayscale(0);
+        -ms-transform: rotate(20deg);
+        transform: rotate(20deg);
+      }
+
+      .rating > input:checked ~ label {
+        filter: grayscale(0);
+      }
+
+      /* Style Submit Button */
+      .submit-btn > button {
+        border: none;
+        padding: 0.7rem 2rem;
+        background-color: #3680aac7;
+        color: #fff;
+        margin: 2rem 0 0 0;
+      }
+
+      .submit-btn > button:hover {
+        box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3),
+          0 15px 12px rgba(0, 0, 0, 0.22);
+      }
+
+      .submit-btn > button:active {
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19),
+          0 6px 6px rgba(0, 0, 0, 0.23);
+      }
+
+      .suggestion-container {
+        padding-top: 0.8rem;
+      }
+
+      .suggestion-container label {
+        display: block;
+        color: #052761c7;
+        margin-top: 0.6rem;
+      }
+
+      .suggestion-container input {
+        border: none;
+        border-width: 0px 0px 2px 0px;
+        border-style: solid;
+        border-color: rgb(104, 104, 197);
+        padding: 0.4rem 0.8rem;
+        color: blue;
+        font-size: 20px;
+      }
+
+      .suggestion-container input:focus {
+        outline: none;
+        border: none;
+        border-width: 0px 0px 3px 0px;
+        border-style: solid;
+        border-color: rgb(104, 104, 197);
+      }
+
+      /* Media Query */
+      @media (max-width: 1024px) {
+        .card {
+          width: 50%;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .card {
+          width: 90%;
+        }
+        .card-header h1 {
+          font-size: 1.7rem;
+        }
+      }
+    </style>
   </head>
   <body>
-    <!-- <button onclick="showOnPage()">Show Browser</button>
-    <button onclick="hideOnPage()">Hide Browser</button> -->
     <div class="feedback-container">
-      <iframe
-        src="http://saarthi3.sameerkumarsinha.com/TuneTalkNewRevampStagingWidget/saarthi.html?botId=4&token=12345"
-        frameborder="0"
-        width="600"
-        height="400"
-      >
-        <p>Your browser does not support iframes.</p>
-      </iframe>
+      <div class="card">
+        <div class="button-container">
+          <button id="close-button">X</button>
+        </div>
+        <div class="card-header">
+          <h1>
+            FEEDBACK
+          </h1>
+        </div>
+        <div class="card-body">
+          <div class="app">
+            <h3>How do you rate your overall experience?</h3>
+            <div class="container">
+              <div class="item">
+                <label for="1">
+                  <input
+                    class="radio emoji-value"
+                    type="radio"
+                    name="feedback"
+                    id="1"
+                    value="1"
+                  />
+                  <span>😡</span>
+                </label>
+              </div>
+
+              <div class="item">
+                <label for="2">
+                  <input
+                    class="radio emoji-value"
+                    type="radio"
+                    name="feedback"
+                    id="2"
+                    value="2"
+                  />
+                  <span>☹️</span>
+                </label>
+              </div>
+
+              <div class="item">
+                <label for="3">
+                  <input
+                    class="radio emoji-value"
+                    type="radio"
+                    name="feedback"
+                    id="3"
+                    value="3"
+                  />
+                  <span>😐</span>
+                </label>
+              </div>
+
+              <div class="item">
+                <label for="4">
+                  <input
+                    class="radio emoji-value"
+                    type="radio"
+                    name="feedback"
+                    id="4"
+                    value="4"
+                  />
+                  <span>😃</span>
+                </label>
+              </div>
+              <div class="item">
+                <label for="5">
+                  <input
+                    class="radio emoji-value"
+                    type="radio"
+                    name="feedback"
+                    id="5"
+                    value="5"
+                  />
+                  <span>😍</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <h3>Are you satisfied with our Product ?</h3>
+          <div class="thumbs-container">
+            <div class="thumbs-item">
+              <label for="yes">
+                <input
+                  class="thumbs-radio thumbs-value"
+                  type="radio"
+                  name="thumbs"
+                  id="yes"
+                  value="yes"
+                />
+                <span>👍</span>
+              </label>
+            </div>
+            <div class="thumbs-item">
+              <label for="no">
+                <input
+                  class="thumbs-radio thumbs-value"
+                  type="radio"
+                  name="thumbs"
+                  id="no"
+                  value="no"
+                />
+                <span>👎</span>
+              </label>
+            </div>
+          </div>
+          <h3>Overall Rating</h3>
+          <div class="rating">
+            <input type="radio" id="star5" name="rating" value="5" /><label
+              class="full"
+              for="star5"
+              title="5 stars"
+              >⭐</label
+            >
+
+            <input type="radio" id="star4" name="rating" value="4" /><label
+              class="full"
+              for="star4"
+              title="4 stars"
+              >⭐</label
+            >
+
+            <input type="radio" id="star3" name="rating" value="3" /><label
+              class="full"
+              for="star3"
+              title="3 stars"
+              >⭐</label
+            >
+
+            <input type="radio" id="star2" name="rating" value="2" /><label
+              class="full"
+              for="star2"
+              title="2 stars"
+              >⭐</label
+            >
+
+            <input type="radio" id="star1" name="rating" value="1" /><label
+              class="full"
+              for="star1"
+              title="1 star"
+              >⭐</label
+            >
+          </div>
+          <div class="suggestion-container">
+            <label for="suggestion">Any Suggestion</label>
+            <input type="text" id="suggestion" />
+          </div>
+          <div class="submit-btn">
+            <button id="submit-btn">
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
+    <script>
+      // UI variables
+      let emojiValue = document.querySelectorAll(".emoji-value");
+      let starValue = document.querySelector(".rating");
+      let thumbsValue = document.querySelectorAll(".thumbs-value");
+      let suggestionBox = document.getElementById("suggestion");
+      let submitButton = document.querySelector("#submit-btn");
+      let cardBody = document.querySelector(".card-body");
+      let card = document.querySelector(".card");
+      let closeBtn = document.getElementById("close-button");
+
+      let emojiInputValue,
+        starInputValue,
+        thumbsInputValue,
+        suggestionInputValue;
+
+      // Add Event Listener to every emoji input box
+      for (let i = 0; i < emojiValue.length; i++) {
+        emojiValue[i].addEventListener("change", function (e) {
+          console.log(e.target.value);
+          emojiInputValue = e.target.value;
+        });
+      }
+
+      // Add Event Listener to every thumbs up/down input box
+      for (let i = 0; i < thumbsValue.length; i++) {
+        thumbsValue[i].addEventListener("change", function (e) {
+          console.log(e.target.value);
+          thumbsInputValue = e.target.value;
+        });
+      }
+
+      // Add Event Listener to every stars input box
+      starValue.addEventListener("change", function (e) {
+        console.log(e.target.value);
+        starInputValue = e.target.value;
+      });
+
+      // Add Event Listener to suggestion input box
+      suggestionBox.addEventListener("keyup", function (e) {
+        suggestionInputValue = e.target.value;
+        console.log(suggestionInputValue);
+      });
+
+      // Add Event Listener to submit button
+      submitButton.addEventListener("click", function (e) {
+        const feedback = {
+          userId: "iegriahijm",
+          sessionId: "gwyesbiot8w7",
+          botId: "4",
+          ratingScale: starInputValue,
+          ratingChoice: thumbsInputValue,
+          ratingText: suggestionInputValue,
+        };
+        let url = " http://backend_test.sameerkumarsinha.com/chatbot/feedback";
+        let httpRequest = new XMLHttpRequest();
+        httpRequest.open("POST", url);
+        httpRequest.setRequestHeader("Content-Type", "application/json");
+        httpRequest.setRequestHeader("Access-Control-Allow-Origin", url);
+        httpRequest.send(JSON.stringify(feedback));
+        httpRequest.onerror = function (
+          XMLHttpRequest,
+          textStatus,
+          errorThrown
+        ) {
+          console.log("On Error Mark_As_Done", JSON.stringify(XMLHttpRequest));
+        };
+        httpRequest.onload = function () {
+          var response = JSON.parse(httpRequest.response);
+          console.log("SUCCESS!", response);
+        };
+        console.log(feedback);
+        cardBody.remove();
+        let makeCardBody = document.createElement("div");
+        makeCardBody.classList.add("card-body");
+        let h3 = document.createElement("h3");
+        h3.innerHTML = "FeedBack Submitted!!!";
+        let btnDiv = document.createElement("div");
+        btnDiv.classList.add("submit-btn");
+        let btn = document.createElement("button");
+        btn.innerHTML = "Back Home";
+        btnDiv.appendChild(btn);
+        makeCardBody.appendChild(h3);
+        makeCardBody.appendChild(btnDiv);
+        card.appendChild(makeCardBody);
+      });
+
+      // Add EventListner On Close Button
+      closeBtn.addEventListener("click", function (e) {
+        alert("Go To Home Page.....");
+      });
+    </script>
   </body>
 </html>
+
